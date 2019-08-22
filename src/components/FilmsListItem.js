@@ -1,9 +1,10 @@
 import React from 'react';
 
-const FilmsListItem = () => {
+const FilmsListItem = props => {
+  let { title } = props;
   return (
     <div>
-      <h2>film list item</h2>
+      <h2>{title}</h2>
     </div>
   );
 };
