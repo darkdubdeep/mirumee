@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
   filmsList: {
     backgroundColor: '#E0E6EE',
-    height: '90vh'
+    minHeight: '90vh'
   }
 }));
 
@@ -20,10 +20,7 @@ const ListItems = props => {
 const FilmsList = () => {
   const [films, setFilms] = useState([]);
   useEffect(() => {
-    fetch('https://swapi.co/api/films', {
-      method: 'GET' // *GET, POST, PUT, DELETE, etc.
-      //   mode: 'no-cors' // no-cors, cors, *same-origin
-    })
+    fetch('https://swapi.co/api/films')
       .then(function(response) {
         return response.json();
       })
