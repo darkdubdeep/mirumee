@@ -15,24 +15,65 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(
+  planetName,
+  rotationPeriod,
+  orbitalPeroid,
+  climate,
+  surfaceWater,
+  pupulation
+) {
+  return {
+    planetName,
+    rotationPeriod,
+    orbitalPeroid,
+    climate,
+    surfaceWater,
+    pupulation
+  };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0)
+  createData('ORAKAL', 305, 3.7, 67, 4.3, 500),
+  createData('§122', 452, 25.0, 51, 4.9, 500),
+  createData('Big foot', 262, 16.0, 24, 6.0, 500),
+  createData('Medium', 159, 6.0, 24, 4.0, 500),
+  createData('Pickup', 356, 16.0, 49, 3.9, 500),
+  createData('Hello', 408, 3.2, 87, 6.5, 400)
+];
+
+const headRows = [
+  {
+    id: 'planetName',
+    numeric: false,
+    disablePadding: true,
+    label: 'Planet name'
+  },
+  {
+    id: 'rotationPeriod',
+    numeric: true,
+    disablePadding: false,
+    label: 'Rotation Period'
+  },
+  {
+    id: 'orbitalPeroid',
+    numeric: true,
+    disablePadding: false,
+    label: 'Orbital Period'
+  },
+  { id: 'climate', numeric: false, disablePadding: false, label: 'Climate' },
+  {
+    id: 'surfaceWater',
+    numeric: true,
+    disablePadding: false,
+    label: 'Surface Water'
+  },
+  {
+    id: 'pupulation',
+    numeric: true,
+    disablePadding: false,
+    label: 'Population'
+  }
 ];
 
 function desc(a, b, orderBy) {
@@ -60,40 +101,6 @@ function getSorting(order, orderBy) {
     ? (a, b) => desc(a, b, orderBy)
     : (a, b) => -desc(a, b, orderBy);
 }
-
-const headRows = [
-  {
-    id: 'planeNname',
-    numeric: false,
-    disablePadding: true,
-    label: 'Planet name'
-  },
-  {
-    id: 'rotationPerios',
-    numeric: true,
-    disablePadding: false,
-    label: 'Rotation Period'
-  },
-  {
-    id: 'orbitalPeroid',
-    numeric: true,
-    disablePadding: false,
-    label: 'Orbital Period'
-  },
-  { id: 'climate', numeric: true, disablePadding: false, label: 'Climate' },
-  {
-    id: 'surfaceWater',
-    numeric: true,
-    disablePadding: false,
-    label: 'Surface Water'
-  },
-  {
-    id: 'pupulation',
-    numeric: true,
-    disablePadding: false,
-    label: 'Population'
-  }
-];
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, rowCount, onRequestSort } = props;
@@ -229,7 +236,7 @@ const useStyles = makeStyles(theme => ({
 export default function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('planetName');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -265,24 +272,15 @@ export default function EnhancedTable() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={row.name}
-                    >
-                      <TableCell
-                        component='th'
-                        id={labelId}
-                        scope='row'
-                        padding='none'
-                      >
-                        {row.name}
+                    <TableRow hover tabIndex={-1} key={row.planetName}>
+                      <TableCell component='th' scope='row' padding='none'>
+                        {row.planetName}
                       </TableCell>
-                      <TableCell align='right'>{row.calories}</TableCell>
-                      <TableCell align='right'>{row.fat}</TableCell>
-                      <TableCell align='right'>{row.carbs}</TableCell>
-                      <TableCell align='right'>{row.protein}</TableCell>
+                      <TableCell align='right'>{row.rotationPeriod}</TableCell>
+                      <TableCell align='right'>{row.orbitalPeroid}</TableCell>
+                      <TableCell align='right'>{row.climate}</TableCell>
+                      <TableCell align='right'>{row.surfaceWater}</TableCell>
+                      <TableCell align='right'>{row.pupulation}</TableCell>
                     </TableRow>
                   );
                 })}
