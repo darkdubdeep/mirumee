@@ -46,7 +46,7 @@ const headRows = [
   {
     id: 'planetName',
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: 'Planet name'
   },
   {
@@ -214,9 +214,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginBottom: theme.spacing(2)
   },
-  table: {
-    minWidth: 750
-  },
+  table: {},
   tableWrapper: {
     overflowX: 'auto'
   },
@@ -273,12 +271,12 @@ export default function EnhancedTable() {
 
                   return (
                     <TableRow hover tabIndex={-1} key={row.planetName}>
-                      <TableCell component='th' scope='row' padding='none'>
+                      <TableCell component='th' scope='row'>
                         {row.planetName}
                       </TableCell>
                       <TableCell align='right'>{row.rotationPeriod}</TableCell>
                       <TableCell align='right'>{row.orbitalPeroid}</TableCell>
-                      <TableCell align='right'>{row.climate}</TableCell>
+                      <TableCell align='center'>{row.climate}</TableCell>
                       <TableCell align='right'>{row.surfaceWater}</TableCell>
                       <TableCell align='right'>{row.pupulation}</TableCell>
                     </TableRow>

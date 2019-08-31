@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 
 const MainView = () => {
   return (
-    <Container style={{ height: '90vh', maxWidth: '790px' }}>
+    <Container style={{ height: '90vh', maxWidth: '795px' }}>
       <FilmsList />
     </Container>
   );
