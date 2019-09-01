@@ -51,26 +51,26 @@ const headRows = [
   },
   {
     id: 'rotationPeriod',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Rotation Period'
   },
   {
     id: 'orbitalPeroid',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Orbital Period'
   },
   { id: 'climate', numeric: false, disablePadding: false, label: 'Climate' },
   {
     id: 'surfaceWater',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Surface Water'
   },
   {
     id: 'pupulation',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Population'
   }
@@ -231,7 +231,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
+  const { planetsData } = props;
+  console.log(planetsData);
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('planetName');
@@ -245,7 +247,8 @@ export default function EnhancedTable() {
   }
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    rowsPerPage -
+    Math.min(rowsPerPage, planetsData.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -261,24 +264,24 @@ export default function EnhancedTable() {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={planetsData.length}
             />
             <TableBody>
-              {stableSort(rows, getSorting(order, orderBy))
+              {stableSort(planetsData, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.planetName}>
+                    <TableRow hover tabIndex={-1} key={row.name}>
                       <TableCell component='th' scope='row'>
-                        {row.planetName}
+                        {row.name}
                       </TableCell>
-                      <TableCell align='right'>{row.rotationPeriod}</TableCell>
-                      <TableCell align='right'>{row.orbitalPeroid}</TableCell>
+                      <TableCell align='right'>{row.rotation_period}</TableCell>
+                      <TableCell align='right'>{row.orbital_period}</TableCell>
                       <TableCell align='center'>{row.climate}</TableCell>
-                      <TableCell align='right'>{row.surfaceWater}</TableCell>
-                      <TableCell align='right'>{row.pupulation}</TableCell>
+                      <TableCell align='right'>{row.surface_water}</TableCell>
+                      <TableCell align='right'>{row.population}</TableCell>
                     </TableRow>
                   );
                 })}
